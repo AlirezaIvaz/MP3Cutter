@@ -13,4 +13,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "MP3Cutter"
-include ':app'
+include(":app")

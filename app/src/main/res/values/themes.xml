@@ -5,8 +5,8 @@
     </style>
     <style name="Theme.MP3Cutter" parent="Base.Theme.MP3Cutter" />
     <style name="Theme.MP3Cutter.Splash" parent="Theme.SplashScreen.IconBackground">
-        <item name="windowSplashScreenBackground">?attr/colorPrimary</item>
-        <item name="windowSplashScreenIconBackgroundColor">?attr/colorPrimary</item>
+        <item name="windowSplashScreenBackground">@color/red_500</item>
+        <item name="windowSplashScreenIconBackgroundColor">@color/red_500</item>
         <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher_background</item>
         <item name="postSplashScreenTheme">@style/Theme.MP3Cutter</item>
     </style>

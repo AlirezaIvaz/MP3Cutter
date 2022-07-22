@@ -1,3 +1,41 @@
 <resources>
     <string name="app_name">برش‌دهنده آهنگ</string>
+
+    <!-- Errors -->
+    <string name="error_bad_exception">استثنا بد رخ داد!</string>
+    <string name="error_sdcard_readonly">
+        "پوزش می‌خواهیم، حافظه به‌صورت فقط-خواندنی نصب شده است و این برنامه نیاز دارد که قابل "
+        "نوشتن باشد."
+    </string>
+    <string name="error_sdcard_shared">
+        "پوزش می‌خواهیم، این برنامه نمی‌تواند هنگامی که دستگاه شما به‌عنوان درایو USB نصب شده است "
+        "اجرا شود."
+    </string>
+    <string name="error_no_sdcard">
+        "پوزش می‌خواهیم، این برنامه نمی‌تواند اجرا شود مگر این‌که کارت حافظه وارد کنید."
+    </string>
+
+    <!-- Warnings -->
+    <string name="warning_permission_denied">دسترسی %1$s اعطا نشده است!</string>
+
+    <!-- Notices -->
+    <string name="attention">توجه!</string>
+    <string name="storage_permission_request">
+        "برای این‌که این برنامه بتواند حافظه دستگاه شما را برای وجود رسانه‌های صوتی بررسی کند و "
+        "آن‌ها را به شما نمایش دهد تا بتوانید آن‌ها را ویرایش کنید، باید دسترسی فضای ذخیره‌سازی "
+        "را به این برنامه بدهید. \n"
+        "این کار اختیاری است، می‌توانید این پیام را نادیده بگیرید و رسانه‌های صوتی را با کلیک "
+        "روی دکمه سنجاق در صفحه اصلی برنامه باز کنید.\n"
+        "هم‌چنین هر زمان که بخواهید می‌توانید این دسترسی را به برنامه بدهید یا از برنامه بگیرید."
+    </string>
+
+    <!-- Actions -->
+    <string name="action_dismiss_forever">دیگر نشان نده</string>
+    <string name="action_grant">اعطا</string>
+    <string name="action_dismiss">نادیده‌گرفتن</string>
+    <string name="action_ok">باشه</string>
+
+    <!-- Permissions -->
+    <string name="permission_storage">فضای ذخیره‌سازی</string>
+
 </resources>

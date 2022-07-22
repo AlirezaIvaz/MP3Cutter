@@ -1,4 +1,39 @@
 <resources>
     <string name="app_name">MP3Cutter</string>
-    <string name="action_add">Add</string>
+
+    <!-- Errors -->
+    <string name="error_bad_exception">Bad exception occurred!</string>
+    <string name="error_sdcard_readonly">
+        "Sorry, the SD Card is mounted as read-only and this app requires it to be writable."
+    </string>
+    <string name="error_sdcard_shared">
+        "Sorry, this app can\'t run while your handset is mounted as a USB device."
+    </string>
+    <string name="error_no_sdcard">
+        "Sorry, this app can\'t run unless you have an SD Card inserted."
+    </string>
+
+    <!-- Warnings -->
+    <string name="warning_permission_denied">%1$s permission not granted!</string>
+
+    <!-- Notices -->
+    <string name="attention">Attention!</string>
+    <string name="storage_permission_request">
+        "In order for this app to scan your device's storage for audio media and display "
+        "them for you to edit, you need to give this app storage permission.\n"
+        "This is optional, you can ignore this notice and open the audio media by clicking "
+        "the pin button on the main screen of the app.\n"
+        "Also, whenever you want, you can give this permission to the app or revoke it from "
+        "the app."
+    </string>
+
+    <!-- Actions -->
+    <string name="action_dismiss_forever">Don\'t show again</string>
+    <string name="action_grant">Grant</string>
+    <string name="action_dismiss">Dismiss</string>
+    <string name="action_ok">OK</string>
+
+    <!-- Permissions -->
+    <string name="permission_storage">Storage</string>
+
 </resources>

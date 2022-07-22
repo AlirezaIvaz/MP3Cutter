@@ -175,7 +175,9 @@ class ActivityMain : AppCompatActivity() {
     }
 
     private fun restartActivity() {
-        // TODO:
+        Handler(Looper.getMainLooper()).postDelayed({
+            startActivity()
+        }, 1000)
     }
 
 }

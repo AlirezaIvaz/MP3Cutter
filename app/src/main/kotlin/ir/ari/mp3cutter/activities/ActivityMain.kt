@@ -200,9 +200,9 @@ class ActivityMain : AppCompatActivity() {
                 selectionArgsList.add("%espeak-data/scratch%")
             }
             if (filter.isNotEmpty()) {
-                filter = "%$filter%";
+                filter = "%$filter%"
                 selection =
-                    "($selection AND ((TITLE LIKE ?) OR (ARTIST LIKE ?) OR (ALBUM LIKE ?)))";
+                    "($selection AND ((TITLE LIKE ?) OR (ARTIST LIKE ?) OR (ALBUM LIKE ?)))"
                 selectionArgsList.add(filter)
                 selectionArgsList.add(filter)
                 selectionArgsList.add(filter)

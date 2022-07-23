@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Environment
 import androidx.core.content.ContextCompat
+import ir.ari.mp3cutter.R
 
 fun Int.toString(context: Context): String = context.getString(this)
 
@@ -22,3 +23,19 @@ val Activity.isStoragePermissionGranted: Boolean
             Manifest.permission.WRITE_EXTERNAL_STORAGE
         ) == PackageManager.PERMISSION_GRANTED
     }
+
+val String.typeIcon: Int
+get() = when (this) {
+    Types.Ringtone -> {
+        R.drawable.ic_ringtone
+    }
+    Types.Alarm -> {
+        R.drawable.ic_alarm
+    }
+    Types.Notification -> {
+        R.drawable.ic_notification
+    }
+    else -> {
+        R.drawable.ic_music
+    }
+}

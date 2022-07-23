@@ -34,8 +34,13 @@
     <string name="action_grant">اعطا</string>
     <string name="action_dismiss">نادیده‌گرفتن</string>
     <string name="action_ok">باشه</string>
+    <string name="action_close">بستن</string>
+    <string name="action_edit">ویرایش</string>
 
     <!-- Permissions -->
     <string name="permission_storage">فضای ذخیره‌سازی</string>
+
+    <!-- Other -->
+    <string name="unknown_artist">هنرمند ناشناس</string>
 
 </resources>

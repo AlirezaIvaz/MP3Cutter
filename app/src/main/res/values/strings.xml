@@ -32,8 +32,13 @@
     <string name="action_grant">Grant</string>
     <string name="action_dismiss">Dismiss</string>
     <string name="action_ok">OK</string>
+    <string name="action_close">Close</string>
+    <string name="action_edit">Edit</string>
 
     <!-- Permissions -->
     <string name="permission_storage">Storage</string>
+
+    <!-- Other -->
+    <string name="unknown_artist">Unknown artist</string>
 
 </resources>

@@ -5,23 +5,32 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.*
+import android.provider.MediaStore
 import android.provider.Settings
 import android.view.ViewGroup
 import android.widget.CheckBox
+import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import ir.ari.mp3cutter.R
 import ir.ari.mp3cutter.databinding.ActivityMainBinding
-import ir.ari.mp3cutter.utils.isStoragePermissionGranted
-import ir.ari.mp3cutter.utils.toString
+import ir.ari.mp3cutter.file.SoundFile
+import ir.ari.mp3cutter.models.Sound
+import ir.ari.mp3cutter.utils.*
 
 class ActivityMain : AppCompatActivity() {
     private val activityMain = this@ActivityMain
     private lateinit var binding: ActivityMainBinding
+    private var filter = ""
+    private var showAll = true
+    private val sounds: ArrayList<Sound> = arrayListOf()
 
     private val requestStoragePermissionResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -171,7 +180,129 @@ class ActivityMain : AppCompatActivity() {
     }
 
     private fun startActivity() {
-        // TODO:
+        if (isStoragePermissionGranted) {
+            var selection = ""
+            val selectionArgsList: ArrayList<String> = arrayListOf()
+            if (showAll) {
+                selection = "(_DATA LIKE ?)"
+                selectionArgsList.add("%")
+            } else {
+                selection = "("
+                SoundFile.getSupportedExtensions().forEach {
+                    selectionArgsList.add("%.$it")
+                    if (selection.length > 1) {
+                        selection += " OR "
+                    }
+                    selection += "(_DATA LIKE ?)"
+                }
+                selection += ")"
+                selection = "($selection) AND (_DATA NOT LIKE ?)"
+                selectionArgsList.add("%espeak-data/scratch%")
+            }
+            if (filter.isNotEmpty()) {
+                filter = "%$filter%";
+                selection =
+                    "($selection AND ((TITLE LIKE ?) OR (ARTIST LIKE ?) OR (ALBUM LIKE ?)))";
+                selectionArgsList.add(filter)
+                selectionArgsList.add(filter)
+                selectionArgsList.add(filter)
+            }
+            val selectionArgs: Array<String> =
+                selectionArgsList.toArray(arrayOfNulls(selectionArgsList.size))
+            val sortOrder = MediaStore.Audio.Media.TITLE + " ASC"
+            val projection = arrayOf(
+                MediaStore.Audio.Media._ID,
+                MediaStore.Audio.Media.ARTIST,
+                MediaStore.Audio.Media.ALBUM,
+                MediaStore.Audio.Media.DATA,
+                MediaStore.Audio.Media.TITLE,
+                MediaStore.Audio.Media.IS_MUSIC,
+                MediaStore.Audio.Media.IS_RINGTONE,
+                MediaStore.Audio.Media.IS_ALARM,
+                MediaStore.Audio.Media.IS_NOTIFICATION,
+            )
+            sounds.clear()
+            contentResolver.query(
+                MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
+                projection,
+                selection,
+                selectionArgs,
+                sortOrder
+            ).use { cursor ->
+                while (cursor!!.moveToNext()) {
+                    val songId =
+                        cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID))
+                    var songArtist =
+                        cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ARTIST))
+                    if (songArtist.isEmpty() || songArtist.contains("<unknown>")) {
+                        songArtist = getString(R.string.unknown_artist)
+                    }
+                    val songAlbum =
+                        cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM))
+                    val songTrack =
+                        cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.TITLE))
+                    val songPath =
+                        cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA))
+                    val songType = when {
+                        cursor.getInt(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.IS_MUSIC)) != 0 -> {
+                            Types.Music
+                        }
+                        cursor.getInt(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.IS_RINGTONE)) != 0 -> {
+                            Types.Ringtone
+                        }
+                        cursor.getInt(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.IS_ALARM)) != 0 -> {
+                            Types.Alarm
+                        }
+                        cursor.getInt(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.IS_NOTIFICATION)) != 0 -> {
+                            Types.Notification
+                        }
+                        else -> {
+                            Types.Unknown
+                        }
+                    }
+                    sounds.add(
+                        Sound(
+                            songId,
+                            songType,
+                            songPath,
+                            songArtist,
+                            songAlbum,
+                            songTrack
+                        )
+                    )
+                }
+            }
+
+            val soundAdapter =
+                RecyclerAdapter(R.layout.layout_item, sounds.size) { holder, position ->
+                    val sound = sounds[position]
+                    (holder.view(R.id.icon) as ImageView).setImageResource(sound.type.typeIcon)
+                    (holder.view(R.id.artist) as TextView).text = sound.artist
+                    (holder.view(R.id.album) as TextView).text = sound.album
+                    (holder.view(R.id.title) as TextView).text = sound.title
+                    (holder.view(R.id.item_layout) as ConstraintLayout).setOnClickListener {
+                        // TODO: On item clicked
+                    }
+                    (holder.view(R.id.edit) as ImageView).setOnClickListener {
+                        // TODO: On edit button clicked
+                    }
+                }
+            binding.recyclerView.layoutManager = LinearLayoutManager(this@ActivityMain)
+            binding.recyclerView.adapter = soundAdapter
+        } else {
+            Snackbar.make(
+                binding.root,
+                String.format(
+                    getString(R.string.warning_permission_denied),
+                    getString(R.string.permission_storage)
+                ),
+                Snackbar.LENGTH_INDEFINITE
+            )
+                .setAction(R.string.action_grant) {
+                    requestStoragePermission()
+                }
+                .show()
+        }
     }
 
     private fun restartActivity() {

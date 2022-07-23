@@ -288,7 +288,7 @@ class ActivityMain : AppCompatActivity() {
             }
 
             val soundAdapter =
-                RecyclerAdapter(R.layout.layout_item, sounds.size) { holder, position ->
+                RecyclerAdapter(R.layout.item_sound, sounds.size) { holder, position ->
                     val sound = sounds[position]
                     (holder.view(R.id.icon) as ImageView).setImageResource(sound.type.typeIcon)
                     (holder.view(R.id.artist) as TextView).text = sound.artist

@@ -181,7 +181,7 @@ class ActivityMain : AppCompatActivity() {
 
     private fun startActivity() {
         if (isStoragePermissionGranted) {
-            var selection = ""
+            var selection: String
             val selectionArgsList: ArrayList<String> = arrayListOf()
             if (showAll) {
                 selection = "(_DATA LIKE ?)"

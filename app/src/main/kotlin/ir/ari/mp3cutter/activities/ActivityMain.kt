@@ -17,11 +17,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import ir.ari.mp3cutter.R
 import ir.ari.mp3cutter.databinding.ActivityMainBinding
 import ir.ari.mp3cutter.file.SoundFile
+import ir.ari.mp3cutter.models.Item
 import ir.ari.mp3cutter.models.Sound
 import ir.ari.mp3cutter.utils.*
 
@@ -295,7 +297,109 @@ class ActivityMain : AppCompatActivity() {
                     (holder.view(R.id.album) as TextView).text = sound.album
                     (holder.view(R.id.title) as TextView).text = sound.title
                     (holder.view(R.id.item_layout) as ConstraintLayout).setOnClickListener {
-                        // TODO: On item clicked
+                        val builder = MaterialAlertDialogBuilder(activityMain)
+                        builder.setTitle(sound.title)
+                        builder.setPositiveButton(R.string.action_close, null)
+                        val dialog = builder.create()
+                        val items = arrayListOf<Item>()
+                        items.add(
+                            Item(
+                                Actions.Edit,
+                                R.drawable.ic_edit,
+                                R.string.action_edit.toString(activityMain)
+                            ) {
+                                // TODO: On edit button clicked
+                            }
+                        )
+                        items.add(
+                            Item(
+                                Actions.Delete,
+                                R.drawable.ic_delete,
+                                R.string.action_delete.toString(activityMain)
+                            ) {
+                                // TODO: Delete the sound
+                            }
+                        )
+                        items.add(
+                            Item(
+                                Actions.Share,
+                                R.drawable.ic_share,
+                                R.string.action_share.toString(activityMain)
+                            ) {
+                                // TODO: Share the sound
+                            }
+                        )
+                        when (sound.type) {
+                            Types.Ringtone -> {
+                                items.add(
+                                    Item(
+                                        Actions.SetAsDefaultRingtone,
+                                        R.drawable.ic_ringtone,
+                                        String.format(
+                                            R.string.action_set_default.toString(activityMain),
+                                            R.string.type_ringtone.toString(activityMain)
+                                        )
+                                    ) {
+                                        // TODO: Set sound as default ringtone
+                                    }
+                                )
+                                items.add(
+                                    Item(
+                                        Actions.AssignContact,
+                                        R.drawable.ic_contacts,
+                                        R.string.action_assign_contact.toString(activityMain)
+                                    ) {
+                                        // TODO: Assign sound to a contact
+                                    }
+                                )
+                            }
+                            Types.Notification -> {
+                                items.add(
+                                    Item(
+                                        Actions.SetAsDefaultNotification,
+                                        R.drawable.ic_notification,
+                                        String.format(
+                                            R.string.action_set_default.toString(activityMain),
+                                            R.string.type_notification.toString(activityMain)
+                                        )
+                                    ) {
+                                        // TODO: Set the sound as default notification sound
+                                    }
+                                )
+                            }
+                        }
+                        items.add(
+                            Item(
+                                Actions.Info,
+                                R.drawable.ic_info,
+                                R.string.action_info.toString(activityMain)
+                            ) {
+                                // TODO: Display the sound information
+                            }
+                        )
+
+                        val adapter =
+                            RecyclerAdapter(R.layout.item, items.size) { holder, position ->
+                                val item = items[position]
+                                (holder.view(R.id.icon) as ImageView).setImageResource(item.icon)
+                                (holder.view(R.id.title) as TextView).text = item.title
+                                (holder.view(R.id.item_layout) as ConstraintLayout).setOnClickListener {
+                                    item.onClick(item)
+                                }
+                            }
+
+                        val linearLayout = LinearLayout(activityMain)
+                        val params = LinearLayout.LayoutParams(
+                            ViewGroup.LayoutParams.MATCH_PARENT,
+                            ViewGroup.LayoutParams.WRAP_CONTENT
+                        )
+                        params.topMargin = 50
+                        val recyclerView = RecyclerView(activityMain)
+                        recyclerView.layoutManager = LinearLayoutManager(activityMain)
+                        recyclerView.adapter = adapter
+                        linearLayout.addView(recyclerView, params)
+                        dialog.setView(linearLayout)
+                        dialog.show()
                     }
                     (holder.view(R.id.edit) as ImageView).setOnClickListener {
                         // TODO: On edit button clicked

@@ -20,6 +20,10 @@
 
     <!-- Notices -->
     <string name="attention">توجه!</string>
+    <string name="delete_alert">آیا مطمئن هستید که می‌خواهید این پرونده را حذف کنید؟</string>
+    <string name="delete_success">پرونده با موفقیت حذف شد!</string>
+    <string name="delete_failed">نتوانستیم پرونده را حذف کنیم!</string>
+    <string name="irreversible_action">مراقب باشید! این کنش همیشگی و بازگشت‌ناپذیر است.</string>
     <string name="storage_permission_request">
         "برای این‌که این برنامه بتواند حافظه دستگاه شما را برای وجود رسانه‌های صوتی بررسی کند و "
         "آن‌ها را به شما نمایش دهد تا بتوانید آن‌ها را ویرایش کنید، باید دسترسی فضای ذخیره‌سازی "
@@ -35,10 +39,25 @@
     <string name="action_dismiss">نادیده‌گرفتن</string>
     <string name="action_ok">باشه</string>
     <string name="action_close">بستن</string>
+    <string name="action_yes">بله</string>
+    <string name="action_no">خیر</string>
     <string name="action_edit">ویرایش</string>
+    <string name="action_delete">حذف</string>
+    <string name="action_share">هم‌رسانی</string>
+    <string name="action_share_chooser">هم‌رسانی با…</string>
+    <string name="action_info">اطلاعات</string>
+    <string name="action_set_default">تنظیم به‌عنوان %1$s پیش‌فرض</string>
+    <string name="action_assign_contact">تنظیم برای مخاطب</string>
 
     <!-- Permissions -->
     <string name="permission_storage">فضای ذخیره‌سازی</string>
+
+    <!-- Sound types -->
+    <string name="type_music">موسیقی</string>
+    <string name="type_ringtone">آهنگ زنگ</string>
+    <string name="type_alarm">هشدار</string>
+    <string name="type_notification">صدای اعلان</string>
+    <string name="type_unknown">ناشناخته</string>
 
     <!-- Other -->
     <string name="unknown_artist">هنرمند ناشناس</string>

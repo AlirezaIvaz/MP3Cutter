@@ -110,6 +110,20 @@ class ActivityMain : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
 
+        binding.swipeRefreshLayout.apply {
+            setColorSchemeResources(
+                R.color.blue_500,
+                R.color.blue_700,
+                R.color.red_700,
+                R.color.red_500,
+                R.color.red_200
+            )
+            setOnRefreshListener {
+                restartActivity()
+            }
+            isRefreshing = true
+        }
+
         if (getSharedPreferences("remember", Activity.MODE_PRIVATE).getBoolean(
                 "check_permission",
                 true
@@ -303,9 +317,11 @@ class ActivityMain : AppCompatActivity() {
                 }
                 .show()
         }
+        binding.swipeRefreshLayout.isRefreshing = false
     }
 
     private fun restartActivity() {
+        binding.swipeRefreshLayout.isRefreshing = true
         Handler(Looper.getMainLooper()).postDelayed({
             startActivity()
         }, 1000)

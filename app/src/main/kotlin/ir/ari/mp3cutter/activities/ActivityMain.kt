@@ -479,7 +479,7 @@ class ActivityMain : AppCompatActivity() {
                                 (holder.view(R.id.icon) as ImageView).setImageResource(item.icon)
                                 (holder.view(R.id.title) as TextView).text = item.title
                                 (holder.view(R.id.item_layout) as ConstraintLayout).setOnClickListener {
-                                    item.onClick(item)
+                                    item.onClick()
                                 }
                             }
 

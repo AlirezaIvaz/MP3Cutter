@@ -460,7 +460,44 @@ class ActivityMain : AppCompatActivity() {
                                             R.string.type_notification.toString(activityMain)
                                         )
                                     ) {
-                                        // TODO: Set the sound as default notification sound
+                                        dialog.dismiss()
+                                        if (isWriteSettingsPermissionGranted) {
+                                            try {
+                                                RingtoneManager.setActualDefaultRingtoneUri(
+                                                    activityMain, RingtoneManager.TYPE_NOTIFICATION,
+                                                    Uri.parse("${MediaStore.Audio.Media.EXTERNAL_CONTENT_URI}/${sound.id}")
+                                                )
+                                                Snackbar.make(
+                                                    binding.root, String.format(
+                                                        R.string.set_default_success.toString(activityMain),
+                                                        sound.title,
+                                                        R.string.type_notification.toString(activityMain)
+                                                    ), Snackbar.LENGTH_SHORT
+                                                ).show()
+                                            } catch (e: Exception) {
+                                                e.printStackTrace()
+                                                Snackbar.make(
+                                                    binding.root,
+                                                    R.string.error_unknown,
+                                                    Snackbar.LENGTH_SHORT
+                                                ).show()
+                                            }
+                                        } else {
+                                            MaterialAlertDialogBuilder(activityMain)
+                                                .setIcon(R.drawable.ic_settings)
+                                                .setTitle(R.string.attention)
+                                                .setMessage(
+                                                    String.format(
+                                                        R.string.settings_permission_request.toString(activityMain),
+                                                        R.string.type_notification.toString(activityMain)
+                                                    )
+                                                )
+                                                .setPositiveButton(R.string.action_grant) { _, _ ->
+                                                    requestWriteSettingsPermission()
+                                                }
+                                                .setNegativeButton(R.string.action_cancel, null)
+                                                .show()
+                                        }
                                     }
                                 )
                             }

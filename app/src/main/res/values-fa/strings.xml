@@ -41,6 +41,7 @@
         "هم‌چنین می‌توانید %1$s را از تنظیمات دستگاه خود به‌صورت دستی تغییر دهید."
     </string>
     <string name="set_default_success">«%1$s» با موفقیت به‌عنوان %2$s پیش‌فرض تنظیم شد!</string>
+    <string name="copy_success">مسیر با موفقیت در بریده‌دان رونویسی شد!</string>
 
     <!-- Actions -->
     <string name="action_dismiss_forever">دیگر نشان نده</string>
@@ -57,6 +58,7 @@
     <string name="action_share">هم‌رسانی</string>
     <string name="action_share_chooser">هم‌رسانی با…</string>
     <string name="action_info">اطلاعات</string>
+    <string name="action_copy_path">رونوشت مسیر</string>
     <string name="action_set_default">تنظیم به‌عنوان %1$s پیش‌فرض</string>
     <string name="action_assign_contact">تنظیم برای مخاطب</string>
 
@@ -72,5 +74,13 @@
 
     <!-- Other -->
     <string name="unknown_artist">هنرمند ناشناس</string>
+    <string name="dialog_information">
+        <![CDATA[
+        <h3>نام:</h3> %1$s<br>
+        <h3>آلبوم:</h3> %2$s<br>
+        <h3>هنرمند:</h3> %3$s<br>
+        <h3>مسیر:</h3> %4$s
+        ]]>
+    </string>
 
 </resources>

@@ -2,12 +2,15 @@ package ir.ari.mp3cutter.activities
 
 import android.Manifest
 import android.app.Activity
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Intent
 import android.media.RingtoneManager
 import android.net.Uri
 import android.os.*
 import android.provider.MediaStore
 import android.provider.Settings
+import android.text.Html
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.ImageView
@@ -507,7 +510,34 @@ class ActivityMain : AppCompatActivity() {
                                 R.drawable.ic_info,
                                 R.string.action_info.toString(activityMain)
                             ) {
-                                // TODO: Display the sound information
+                                dialog.dismiss()
+                                val message = String.format(
+                                    getString(R.string.dialog_information),
+                                    sound.title, sound.album, sound.artist, sound.path
+                                )
+                                MaterialAlertDialogBuilder(this@ActivityMain)
+                                    .setIcon(R.drawable.ic_info)
+                                    .setTitle(R.string.action_info)
+                                    .setMessage(
+                                        if (Build.VERSION.SDK_INT >= 24) {
+                                            Html.fromHtml(message, Html.FROM_HTML_MODE_LEGACY)
+                                        } else {
+                                            @Suppress("DEPRECATION")
+                                            Html.fromHtml(message)
+                                        }
+                                    )
+                                    .setNegativeButton(R.string.action_copy_path) { _, _ ->
+                                        try {
+                                            (getSystemService(CLIPBOARD_SERVICE) as ClipboardManager)
+                                                .setPrimaryClip(ClipData.newPlainText(sound.title, sound.path))
+                                            Snackbar.make(binding.root, R.string.copy_success, Snackbar.LENGTH_SHORT).show()
+                                        } catch (e: Exception) {
+                                            Snackbar.make(binding.root, R.string.error_unknown, Snackbar.LENGTH_SHORT).show()
+                                        }
+
+                                    }
+                                    .setPositiveButton(R.string.action_ok, null)
+                                    .show()
                             }
                         )
 

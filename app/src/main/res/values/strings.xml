@@ -39,6 +39,7 @@
         "You can also change the ringtone manually from your device settings."
     </string>
     <string name="set_default_success">"%1$s" was successfully set as default %2$s!</string>
+    <string name="copy_success">The path was successfully copied to the clipboard!</string>
 
     <!-- Actions -->
     <string name="action_dismiss_forever">Don\'t show again</string>
@@ -55,6 +56,7 @@
     <string name="action_share">Share</string>
     <string name="action_share_chooser">Share with…</string>
     <string name="action_info">Info</string>
+    <string name="action_copy_path">Copy path</string>
     <string name="action_set_default">Set as default %1$s</string>
     <string name="action_assign_contact">Assign to contact</string>
 
@@ -70,5 +72,13 @@
 
     <!-- Other -->
     <string name="unknown_artist">Unknown artist</string>
+    <string name="dialog_information">
+        <![CDATA[
+        <h3>Title:</h3> %1$s<br>
+        <h3>Album:</h3> %2$s<br>
+        <h3>Artist:</h3> %3$s<br>
+        <h3>Path:</h3> %4$s
+        ]]>
+    </string>
 
 </resources>

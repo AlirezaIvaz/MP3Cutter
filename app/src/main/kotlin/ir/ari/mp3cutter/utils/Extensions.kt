@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Environment
+import android.provider.Settings
 import androidx.core.content.ContextCompat
 import ir.ari.mp3cutter.R
 
@@ -23,6 +24,11 @@ val Activity.isStoragePermissionGranted: Boolean
             Manifest.permission.WRITE_EXTERNAL_STORAGE
         ) == PackageManager.PERMISSION_GRANTED
     }
+
+val Activity.isWriteSettingsPermissionGranted: Boolean
+    get() = if (Build.VERSION.SDK_INT >= 23) {
+        Settings.System.canWrite(this)
+    } else true
 
 val String.typeIcon: Int
 get() = when (this) {

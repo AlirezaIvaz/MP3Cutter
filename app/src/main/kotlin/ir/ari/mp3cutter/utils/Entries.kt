@@ -9,6 +9,7 @@ object Types {
 }
 
 object Actions {
+    const val Open = "open"
     const val Info = "info"
     const val Edit = "edit"
     const val Delete = "action-delete"

@@ -309,6 +309,21 @@ class ActivityMain : AppCompatActivity() {
                         val items = arrayListOf<Item>()
                         items.add(
                             Item(
+                                Actions.Open,
+                                R.drawable.ic_open_with,
+                                R.string.action_open.toString(activityMain)
+                            ) {
+                                dialog.dismiss()
+                                startActivity(
+                                    Intent()
+                                        .setAction(Intent.ACTION_VIEW)
+                                        .setDataAndType(Uri.parse("${MediaStore.Audio.Media.EXTERNAL_CONTENT_URI}/${sound.id}"), "audio/*")
+
+                                )
+                            }
+                        )
+                        items.add(
+                            Item(
                                 Actions.Edit,
                                 R.drawable.ic_edit,
                                 R.string.action_edit.toString(activityMain)

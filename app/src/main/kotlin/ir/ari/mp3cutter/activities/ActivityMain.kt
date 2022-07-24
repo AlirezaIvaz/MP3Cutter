@@ -351,7 +351,14 @@ class ActivityMain : AppCompatActivity() {
                                 R.drawable.ic_share,
                                 R.string.action_share.toString(activityMain)
                             ) {
-                                // TODO: Share the sound
+                                startActivity(
+                                    Intent.createChooser(
+                                        Intent(Intent.ACTION_SEND)
+                                            .setType("audio/*")
+                                            .putExtra(Intent.EXTRA_STREAM, Uri.parse(sound.path)),
+                                        getString(R.string.action_share_chooser)
+                                    )
+                                )
                             }
                         )
                         when (sound.type) {

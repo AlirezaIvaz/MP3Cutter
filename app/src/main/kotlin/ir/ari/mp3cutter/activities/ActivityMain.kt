@@ -3,6 +3,7 @@ package ir.ari.mp3cutter.activities
 import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.media.RingtoneManager
 import android.net.Uri
 import android.os.*
 import android.provider.MediaStore
@@ -73,6 +74,16 @@ class ActivityMain : AppCompatActivity() {
                 this@ActivityMain,
                 arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
                 100
+            )
+        }
+    }
+
+    private fun requestWriteSettingsPermission() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            startActivity(
+                Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS)
+                    .setData(Uri.parse("package:$packageName"))
+                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             )
         }
     }
@@ -394,7 +405,45 @@ class ActivityMain : AppCompatActivity() {
                                             R.string.type_ringtone.toString(activityMain)
                                         )
                                     ) {
-                                        // TODO: Set sound as default ringtone
+                                        dialog.dismiss()
+                                        if (isWriteSettingsPermissionGranted) {
+                                            try {
+                                                RingtoneManager.setActualDefaultRingtoneUri(
+                                                    activityMain, RingtoneManager.TYPE_RINGTONE,
+                                                    Uri.parse("${MediaStore.Audio.Media.EXTERNAL_CONTENT_URI}/${sound.id}")
+                                                )
+                                                Snackbar.make(
+                                                    binding.root, String.format(
+                                                        R.string.set_default_success.toString(activityMain),
+                                                        sound.title,
+                                                        R.string.type_ringtone.toString(activityMain)
+                                                    ), Snackbar.LENGTH_SHORT
+                                                ).show()
+                                            } catch (e: Exception) {
+                                                e.printStackTrace()
+                                                Snackbar.make(
+                                                    binding.root,
+                                                    R.string.error_unknown,
+                                                    Snackbar.LENGTH_SHORT
+                                                ).show()
+                                            }
+                                        } else {
+                                            MaterialAlertDialogBuilder(activityMain)
+                                                .setIcon(R.drawable.ic_settings)
+                                                .setTitle(R.string.attention)
+                                                .setMessage(
+                                                    String.format(
+                                                        R.string.settings_permission_request.toString(activityMain),
+                                                        R.string.type_ringtone.toString(activityMain)
+                                                    )
+                                                )
+                                                .setPositiveButton(R.string.action_grant) { _, _ ->
+                                                    requestWriteSettingsPermission()
+                                                }
+                                                .setNegativeButton(R.string.action_cancel, null)
+                                                .show()
+                                        }
+
                                     }
                                 )
                                 items.add(

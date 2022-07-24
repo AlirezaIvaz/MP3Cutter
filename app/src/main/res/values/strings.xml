@@ -2,6 +2,7 @@
     <string name="app_name">MP3Cutter</string>
 
     <!-- Errors -->
+    <string name="error_unknown">Unknown error occurred!</string>
     <string name="error_bad_exception">Bad exception occurred!</string>
     <string name="error_sdcard_readonly">
         "Sorry, the SD Card is mounted as read-only and this app requires it to be writable."
@@ -30,15 +31,25 @@
         "Also, whenever you want, you can give this permission to the app or revoke it from "
         "the app."
     </string>
+    <string name="settings_permission_request">
+        "In order to be able to change the default %1$s of your device, this app requires "
+        "change system settings permission.\n"
+        "We only use this permission to change the ringtone and notification sound of the "
+        "device and you can revoke it from the app whenever you want.\n"
+        "You can also change the ringtone manually from your device settings."
+    </string>
+    <string name="set_default_success">"%1$s" was successfully set as default %2$s!</string>
 
     <!-- Actions -->
     <string name="action_dismiss_forever">Don\'t show again</string>
     <string name="action_grant">Grant</string>
     <string name="action_dismiss">Dismiss</string>
     <string name="action_ok">OK</string>
+    <string name="action_cancel">Cancel</string>
     <string name="action_close">Close</string>
     <string name="action_yes">Yes</string>
     <string name="action_no">No</string>
+    <string name="action_open">Open</string>
     <string name="action_edit">Edit</string>
     <string name="action_delete">Delete</string>
     <string name="action_share">Share</string>

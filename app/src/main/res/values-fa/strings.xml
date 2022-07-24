@@ -2,6 +2,7 @@
     <string name="app_name">برش‌دهنده آهنگ</string>
 
     <!-- Errors -->
+    <string name="error_unknown">خطای ناشناخته رخ داد!</string>
     <string name="error_bad_exception">استثنا بد رخ داد!</string>
     <string name="error_sdcard_readonly">
         "پوزش می‌خواهیم، حافظه به‌صورت فقط-خواندنی نصب شده است و این برنامه نیاز دارد که قابل "
@@ -32,15 +33,25 @@
         "روی دکمه سنجاق در صفحه اصلی برنامه باز کنید.\n"
         "هم‌چنین هر زمان که بخواهید می‌توانید این دسترسی را به برنامه بدهید یا از برنامه بگیرید."
     </string>
+    <string name="settings_permission_request">
+        "برای این‌که بتوانید %1$s پیش‌فرض دستگاه خود را تغییر دهید، این برنامه به دسترسی تغییر "
+        "تنظیمات سیستم نیاز دارد.\n"
+        "ما از این دسترسی فقط برای تغییر آهنگ زنگ و صدای اعلان دستگاه استفاده می‌کنیم و هر زمان "
+        "که خواستید می‌توانید آن‌را از برنامه بگیرید.\n"
+        "هم‌چنین می‌توانید %1$s را از تنظیمات دستگاه خود به‌صورت دستی تغییر دهید."
+    </string>
+    <string name="set_default_success">«%1$s» با موفقیت به‌عنوان %2$s پیش‌فرض تنظیم شد!</string>
 
     <!-- Actions -->
     <string name="action_dismiss_forever">دیگر نشان نده</string>
     <string name="action_grant">اعطا</string>
     <string name="action_dismiss">نادیده‌گرفتن</string>
     <string name="action_ok">باشه</string>
+    <string name="action_cancel">انصراف</string>
     <string name="action_close">بستن</string>
     <string name="action_yes">بله</string>
     <string name="action_no">خیر</string>
+    <string name="action_open">بازکردن</string>
     <string name="action_edit">ویرایش</string>
     <string name="action_delete">حذف</string>
     <string name="action_share">هم‌رسانی</string>

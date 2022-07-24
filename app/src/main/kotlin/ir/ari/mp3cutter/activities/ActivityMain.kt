@@ -337,6 +337,7 @@ class ActivityMain : AppCompatActivity() {
                                 R.drawable.ic_delete,
                                 R.string.action_delete.toString(activityMain)
                             ) {
+                                dialog.dismiss()
                                 MaterialAlertDialogBuilder(activityMain)
                                     .setIcon(R.drawable.ic_delete)
                                     .setTitle(R.string.delete_alert)
@@ -371,6 +372,7 @@ class ActivityMain : AppCompatActivity() {
                                 R.drawable.ic_share,
                                 R.string.action_share.toString(activityMain)
                             ) {
+                                dialog.dismiss()
                                 startActivity(
                                     Intent.createChooser(
                                         Intent(Intent.ACTION_SEND)

@@ -317,7 +317,20 @@ class ActivityMain : AppCompatActivity() {
                                 R.drawable.ic_delete,
                                 R.string.action_delete.toString(activityMain)
                             ) {
-                                // TODO: Delete the sound
+                                MaterialAlertDialogBuilder(activityMain)
+                                    .setIcon(R.drawable.ic_delete)
+                                    .setTitle(R.string.delete_alert)
+                                    .setMessage(R.string.irreversible_action)
+                                    .setNegativeButton(R.string.action_no, null)
+                                    .setPositiveButton(R.string.action_yes) { _, _ ->
+                                        try {
+                                            contentResolver.delete(Uri.parse("${MediaStore.Audio.Media.EXTERNAL_CONTENT_URI}/${sound.id}"), null, null)
+                                            Snackbar.make(binding.root, R.string.delete_success, Snackbar.LENGTH_SHORT).show()
+                                        } catch (e: Exception) {
+                                            Snackbar.make(binding.root, R.string.delete_failed, Snackbar.LENGTH_SHORT).show()
+                                        }
+                                    }
+                                    .show()
                             }
                         )
                         items.add(

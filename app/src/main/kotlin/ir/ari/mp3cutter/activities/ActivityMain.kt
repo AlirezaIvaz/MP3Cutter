@@ -136,6 +136,7 @@ class ActivityMain : AppCompatActivity() {
                 when {
                     status == Environment.MEDIA_MOUNTED_READ_ONLY -> {
                         MaterialAlertDialogBuilder(activityMain)
+                            .setIcon(R.drawable.ic_error)
                             .setTitle(R.string.error_bad_exception)
                             .setMessage(R.string.error_sdcard_readonly)
                             .setPositiveButton(R.string.action_ok) { _, _ -> finish() }
@@ -145,6 +146,7 @@ class ActivityMain : AppCompatActivity() {
                     }
                     status == Environment.MEDIA_SHARED -> {
                         MaterialAlertDialogBuilder(activityMain)
+                            .setIcon(R.drawable.ic_error)
                             .setTitle(R.string.error_bad_exception)
                             .setMessage(R.string.error_sdcard_shared)
                             .setPositiveButton(R.string.action_ok) { _, _ -> finish() }
@@ -154,6 +156,7 @@ class ActivityMain : AppCompatActivity() {
                     }
                     status != Environment.MEDIA_MOUNTED -> {
                         MaterialAlertDialogBuilder(activityMain)
+                            .setIcon(R.drawable.ic_error)
                             .setTitle(R.string.error_bad_exception)
                             .setMessage(R.string.error_no_sdcard)
                             .setPositiveButton(R.string.action_ok) { _, _ -> finish() }
@@ -178,10 +181,11 @@ class ActivityMain : AppCompatActivity() {
                 }
                 linearLayout.addView(checkbox, params)
                 MaterialAlertDialogBuilder(activityMain)
-                    .setCancelable(false)
+                    .setIcon(R.drawable.ic_folder)
                     .setTitle(R.string.attention)
                     .setMessage(R.string.storage_permission_request)
                     .setView(linearLayout)
+                    .setCancelable(false)
                     .setPositiveButton(R.string.action_grant) { _, _ ->
                         requestStoragePermission()
                     }
@@ -298,6 +302,7 @@ class ActivityMain : AppCompatActivity() {
                     (holder.view(R.id.title) as TextView).text = sound.title
                     (holder.view(R.id.item_layout) as ConstraintLayout).setOnClickListener {
                         val builder = MaterialAlertDialogBuilder(activityMain)
+                        builder.setIcon(sound.type.typeIcon)
                         builder.setTitle(sound.title)
                         builder.setPositiveButton(R.string.action_close, null)
                         val dialog = builder.create()

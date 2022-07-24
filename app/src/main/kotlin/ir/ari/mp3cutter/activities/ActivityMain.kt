@@ -320,7 +320,6 @@ class ActivityMain : AppCompatActivity() {
                         val items = arrayListOf<Item>()
                         items.add(
                             Item(
-                                Actions.Open,
                                 R.drawable.ic_open_with,
                                 R.string.action_open.toString(activityMain)
                             ) {
@@ -335,7 +334,6 @@ class ActivityMain : AppCompatActivity() {
                         )
                         items.add(
                             Item(
-                                Actions.Edit,
                                 R.drawable.ic_edit,
                                 R.string.action_edit.toString(activityMain)
                             ) {
@@ -344,7 +342,6 @@ class ActivityMain : AppCompatActivity() {
                         )
                         items.add(
                             Item(
-                                Actions.Delete,
                                 R.drawable.ic_delete,
                                 R.string.action_delete.toString(activityMain)
                             ) {
@@ -379,7 +376,6 @@ class ActivityMain : AppCompatActivity() {
                         )
                         items.add(
                             Item(
-                                Actions.Share,
                                 R.drawable.ic_share,
                                 R.string.action_share.toString(activityMain)
                             ) {
@@ -398,7 +394,6 @@ class ActivityMain : AppCompatActivity() {
                             Types.Ringtone -> {
                                 items.add(
                                     Item(
-                                        Actions.SetAsDefaultRingtone,
                                         R.drawable.ic_ringtone,
                                         String.format(
                                             R.string.action_set_default.toString(activityMain),
@@ -448,7 +443,6 @@ class ActivityMain : AppCompatActivity() {
                                 )
                                 items.add(
                                     Item(
-                                        Actions.AssignContact,
                                         R.drawable.ic_contacts,
                                         R.string.action_assign_contact.toString(activityMain)
                                     ) {
@@ -459,7 +453,6 @@ class ActivityMain : AppCompatActivity() {
                             Types.Notification -> {
                                 items.add(
                                     Item(
-                                        Actions.SetAsDefaultNotification,
                                         R.drawable.ic_notification,
                                         String.format(
                                             R.string.action_set_default.toString(activityMain),
@@ -473,7 +466,6 @@ class ActivityMain : AppCompatActivity() {
                         }
                         items.add(
                             Item(
-                                Actions.Info,
                                 R.drawable.ic_info,
                                 R.string.action_info.toString(activityMain)
                             ) {

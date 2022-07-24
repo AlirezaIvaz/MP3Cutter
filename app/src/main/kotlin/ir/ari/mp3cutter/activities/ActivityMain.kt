@@ -363,6 +363,7 @@ class ActivityMain : AppCompatActivity() {
                                                 R.string.delete_success,
                                                 Snackbar.LENGTH_SHORT
                                             ).show()
+                                            restartActivity()
                                         } catch (e: Exception) {
                                             Snackbar.make(
                                                 binding.root,

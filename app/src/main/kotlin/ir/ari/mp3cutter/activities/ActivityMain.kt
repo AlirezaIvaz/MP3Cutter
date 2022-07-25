@@ -41,9 +41,9 @@ class ActivityMain : AppCompatActivity() {
     private val activityMain = this@ActivityMain
     private lateinit var binding: ActivityMainBinding
     private lateinit var searchView: SearchView
+    private lateinit var currentSound: Sound
     private var filter = ""
     private val sounds: ArrayList<Sound> = arrayListOf()
-    private lateinit var sound: Sound
 
     private val requestStoragePermissionResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -92,7 +92,7 @@ class ActivityMain : AppCompatActivity() {
                     localContentValues.put(ContactsContract.Data.RAW_CONTACT_ID, contactId)
                     localContentValues.put(
                         ContactsContract.Data.CUSTOM_RINGTONE,
-                        sound.path
+                        currentSound.path
                     )
                     contentResolver.update(localUri, localContentValues, null, null)
                     Snackbar.make(
@@ -119,21 +119,21 @@ class ActivityMain : AppCompatActivity() {
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (isWriteSettingsPermissionGranted) {
                 try {
-                    if (sound.type == Types.Ringtone || sound.type == Types.Notification) {
+                    if (currentSound.type == Types.Ringtone || currentSound.type == Types.Notification) {
                         val type =
-                            if (sound.type == Types.Notification) RingtoneManager.TYPE_NOTIFICATION
+                            if (currentSound.type == Types.Notification) RingtoneManager.TYPE_NOTIFICATION
                             else RingtoneManager.TYPE_RINGTONE
                         val typeName =
-                            if (sound.type == Types.Notification) R.string.type_notification
+                            if (currentSound.type == Types.Notification) R.string.type_notification
                             else R.string.type_ringtone
                         RingtoneManager.setActualDefaultRingtoneUri(
                             activityMain, type,
-                            Uri.parse("${MediaStore.Audio.Media.EXTERNAL_CONTENT_URI}/${sound.id}")
+                            Uri.parse("${MediaStore.Audio.Media.EXTERNAL_CONTENT_URI}/${currentSound.id}")
                         )
                         Snackbar.make(
                             binding.root, String.format(
                                 R.string.set_default_success.toString(activityMain),
-                                sound.title,
+                                currentSound.title,
                                 typeName.toString(activityMain)
                             ), Snackbar.LENGTH_SHORT
                         ).show()
@@ -422,12 +422,13 @@ class ActivityMain : AppCompatActivity() {
 
             val soundAdapter =
                 RecyclerAdapter(R.layout.item_sound, sounds.size) { holder, position ->
-                    sound = sounds[position]
+                    val sound = sounds[position]
                     (holder.view(R.id.icon) as ImageView).setImageResource(sound.type.typeIcon)
                     (holder.view(R.id.artist) as TextView).text = sound.artist
                     (holder.view(R.id.album) as TextView).text = sound.album
                     (holder.view(R.id.title) as TextView).text = sound.title
                     (holder.view(R.id.item_layout) as ConstraintLayout).setOnClickListener {
+                        currentSound = sound
                         val builder = MaterialAlertDialogBuilder(activityMain)
                         builder.setIcon(sound.type.typeIcon)
                         builder.setTitle(sound.title)

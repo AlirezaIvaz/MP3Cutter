@@ -42,17 +42,17 @@ val Activity.isWriteSettingsPermissionGranted: Boolean
     } else true
 
 val String.typeIcon: Int
-get() = when (this) {
-    Types.Ringtone -> {
-        R.drawable.ic_ringtone
+    get() = when (this) {
+        Types.Ringtone -> {
+            R.drawable.ic_ringtone
+        }
+        Types.Alarm -> {
+            R.drawable.ic_alarm
+        }
+        Types.Notification -> {
+            R.drawable.ic_notification
+        }
+        else -> {
+            R.drawable.ic_music
+        }
     }
-    Types.Alarm -> {
-        R.drawable.ic_alarm
-    }
-    Types.Notification -> {
-        R.drawable.ic_notification
-    }
-    else -> {
-        R.drawable.ic_music
-    }
-}

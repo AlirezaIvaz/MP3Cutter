@@ -400,7 +400,10 @@ class ActivityMain : AppCompatActivity() {
                                 startActivity(
                                     Intent()
                                         .setAction(Intent.ACTION_VIEW)
-                                        .setDataAndType(Uri.parse("${MediaStore.Audio.Media.EXTERNAL_CONTENT_URI}/${sound.id}"), "audio/*")
+                                        .setDataAndType(
+                                            Uri.parse("${MediaStore.Audio.Media.EXTERNAL_CONTENT_URI}/${sound.id}"),
+                                            "audio/*"
+                                        )
 
                                 )
                             }
@@ -483,7 +486,9 @@ class ActivityMain : AppCompatActivity() {
                                                 )
                                                 Snackbar.make(
                                                     binding.root, String.format(
-                                                        R.string.set_default_success.toString(activityMain),
+                                                        R.string.set_default_success.toString(
+                                                            activityMain
+                                                        ),
                                                         sound.title,
                                                         R.string.type_ringtone.toString(activityMain)
                                                     ), Snackbar.LENGTH_SHORT
@@ -502,7 +507,9 @@ class ActivityMain : AppCompatActivity() {
                                                 .setTitle(R.string.attention)
                                                 .setMessage(
                                                     String.format(
-                                                        R.string.settings_permission_request.toString(activityMain),
+                                                        R.string.settings_permission_request.toString(
+                                                            activityMain
+                                                        ),
                                                         R.string.type_ringtone.toString(activityMain)
                                                     )
                                                 )
@@ -563,9 +570,13 @@ class ActivityMain : AppCompatActivity() {
                                                 )
                                                 Snackbar.make(
                                                     binding.root, String.format(
-                                                        R.string.set_default_success.toString(activityMain),
+                                                        R.string.set_default_success.toString(
+                                                            activityMain
+                                                        ),
                                                         sound.title,
-                                                        R.string.type_notification.toString(activityMain)
+                                                        R.string.type_notification.toString(
+                                                            activityMain
+                                                        )
                                                     ), Snackbar.LENGTH_SHORT
                                                 ).show()
                                             } catch (e: Exception) {
@@ -582,8 +593,12 @@ class ActivityMain : AppCompatActivity() {
                                                 .setTitle(R.string.attention)
                                                 .setMessage(
                                                     String.format(
-                                                        R.string.settings_permission_request.toString(activityMain),
-                                                        R.string.type_notification.toString(activityMain)
+                                                        R.string.settings_permission_request.toString(
+                                                            activityMain
+                                                        ),
+                                                        R.string.type_notification.toString(
+                                                            activityMain
+                                                        )
                                                     )
                                                 )
                                                 .setPositiveButton(R.string.action_grant) { _, _ ->
@@ -620,10 +635,23 @@ class ActivityMain : AppCompatActivity() {
                                     .setNegativeButton(R.string.action_copy_path) { _, _ ->
                                         try {
                                             (getSystemService(CLIPBOARD_SERVICE) as ClipboardManager)
-                                                .setPrimaryClip(ClipData.newPlainText(sound.title, sound.path))
-                                            Snackbar.make(binding.root, R.string.copy_success, Snackbar.LENGTH_SHORT).show()
+                                                .setPrimaryClip(
+                                                    ClipData.newPlainText(
+                                                        sound.title,
+                                                        sound.path
+                                                    )
+                                                )
+                                            Snackbar.make(
+                                                binding.root,
+                                                R.string.copy_success,
+                                                Snackbar.LENGTH_SHORT
+                                            ).show()
                                         } catch (e: Exception) {
-                                            Snackbar.make(binding.root, R.string.error_unknown, Snackbar.LENGTH_SHORT).show()
+                                            Snackbar.make(
+                                                binding.root,
+                                                R.string.error_unknown,
+                                                Snackbar.LENGTH_SHORT
+                                            ).show()
                                         }
 
                                     }

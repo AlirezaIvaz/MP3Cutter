@@ -4,6 +4,7 @@
     <!-- Errors -->
     <string name="error_unknown">Unknown error occurred!</string>
     <string name="error_bad_exception">Bad exception occurred!</string>
+    <string name="error_action_denied">The requested action isn\'t allowed for this type of file!</string>
     <string name="error_sdcard_readonly">
         "Sorry, the SD Card is mounted as read-only and this app requires it to be writable."
     </string>
@@ -69,6 +70,7 @@
 
     <!-- Permissions -->
     <string name="permission_storage">Storage</string>
+    <string name="permission_settings">Change System Settings</string>
     <string name="permission_contacts">Contacts</string>
 
     <!-- Sound types -->

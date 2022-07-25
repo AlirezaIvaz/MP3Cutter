@@ -4,6 +4,7 @@
     <!-- Errors -->
     <string name="error_unknown">خطای ناشناخته رخ داد!</string>
     <string name="error_bad_exception">استثنا بد رخ داد!</string>
+    <string name="error_action_denied">کنش درخواست‌شده برای این نوع از پرونده مجاز نیست!</string>
     <string name="error_sdcard_readonly">
         "پوزش می‌خواهیم، حافظه به‌صورت فقط-خواندنی نصب شده است و این برنامه نیاز دارد که قابل "
         "نوشتن باشد."
@@ -71,6 +72,7 @@
 
     <!-- Permissions -->
     <string name="permission_storage">فضای ذخیره‌سازی</string>
+    <string name="permission_settings">تغییر تنظیمات سیستم</string>
     <string name="permission_contacts">مخاطبین</string>
 
     <!-- Sound types -->

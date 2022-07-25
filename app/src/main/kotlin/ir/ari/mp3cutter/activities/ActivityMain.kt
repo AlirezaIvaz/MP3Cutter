@@ -112,6 +112,54 @@ class ActivityMain : AppCompatActivity() {
             }
         }
 
+    private val requestWriteSettingsPermissionResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (isWriteSettingsPermissionGranted) {
+                try {
+                    if (sound.type == Types.Ringtone || sound.type == Types.Notification) {
+                        val type =
+                            if (sound.type == Types.Notification) RingtoneManager.TYPE_NOTIFICATION
+                            else RingtoneManager.TYPE_RINGTONE
+                        val typeName =
+                            if (sound.type == Types.Notification) R.string.type_notification
+                            else R.string.type_ringtone
+                        RingtoneManager.setActualDefaultRingtoneUri(
+                            activityMain, type,
+                            Uri.parse("${MediaStore.Audio.Media.EXTERNAL_CONTENT_URI}/${sound.id}")
+                        )
+                        Snackbar.make(
+                            binding.root, String.format(
+                                R.string.set_default_success.toString(activityMain),
+                                sound.title,
+                                typeName.toString(activityMain)
+                            ), Snackbar.LENGTH_SHORT
+                        ).show()
+                    } else {
+                        Snackbar.make(
+                            binding.root,
+                            R.string.error_action_denied,
+                            Snackbar.LENGTH_SHORT
+                        ).show()
+                    }
+                } catch (e: Exception) {
+                    Snackbar.make(
+                        binding.root,
+                        R.string.error_unknown,
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                }
+            } else {
+                Snackbar.make(
+                    binding.root,
+                    String.format(
+                        R.string.warning_permission_denied.toString(activityMain),
+                        R.string.permission_settings.toString(activityMain)
+                    ),
+                    Snackbar.LENGTH_INDEFINITE
+                ).show()
+            }
+        }
+
     private fun requestStoragePermission() {
         if (Build.VERSION.SDK_INT >= 30) {
             try {
@@ -134,13 +182,10 @@ class ActivityMain : AppCompatActivity() {
     }
 
     private fun requestWriteSettingsPermission() {
-        if (Build.VERSION.SDK_INT >= 23) {
-            startActivity(
-                Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS)
-                    .setData(Uri.parse("package:$packageName"))
-                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            )
-        }
+        requestWriteSettingsPermissionResult.launch(
+            Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS)
+                .setData(Uri.parse("package:$packageName"))
+        )
     }
 
     override fun onRequestPermissionsResult(

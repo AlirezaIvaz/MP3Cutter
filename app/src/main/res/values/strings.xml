@@ -32,8 +32,8 @@
         "the app."
     </string>
     <string name="settings_permission_request">
-        "In order to be able to change the default %1$s of your device, this app requires "
-        "change system settings permission.\n"
+        "In order for this app to be able to change the default %1$s of your device, you need to "
+        "give this app change system settings permission.\n"
         "We only use this permission to change the ringtone and notification sound of the "
         "device and you can revoke it from the app whenever you want.\n"
         "You can also change the ringtone manually from your device settings."

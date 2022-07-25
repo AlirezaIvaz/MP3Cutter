@@ -13,16 +13,20 @@ import ir.ari.mp3cutter.R
 fun Int.toString(context: Context): String = context.getString(this)
 
 val Activity.isStoragePermissionGranted: Boolean
-    get() = if (Build.VERSION.SDK_INT >= 30) {
-        Environment.isExternalStorageManager()
-    } else {
-        ContextCompat.checkSelfPermission(
-            this,
-            Manifest.permission.READ_EXTERNAL_STORAGE
-        ) == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(
-            this,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
-        ) == PackageManager.PERMISSION_GRANTED
+    get() = when {
+        Build.VERSION.SDK_INT >= 30 -> {
+            Environment.isExternalStorageManager()
+        }
+        Build.VERSION.SDK_INT >= 23 -> {
+            ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            ) == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ) == PackageManager.PERMISSION_GRANTED
+        }
+        else -> true
     }
 
 val Activity.isWriteSettingsPermissionGranted: Boolean

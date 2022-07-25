@@ -37,7 +37,7 @@ class ActivityMain : AppCompatActivity() {
     private var filter = ""
     private var showAll = true
     private val sounds: ArrayList<Sound> = arrayListOf()
-    private var selectedSound = 0
+    private lateinit var sound: Sound
 
     private val requestStoragePermissionResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -86,7 +86,7 @@ class ActivityMain : AppCompatActivity() {
                     localContentValues.put(ContactsContract.Data.RAW_CONTACT_ID, contactId)
                     localContentValues.put(
                         ContactsContract.Data.CUSTOM_RINGTONE,
-                        sounds[selectedSound].path
+                        sound.path
                     )
                     contentResolver.update(localUri, localContentValues, null, null)
                     Snackbar.make(
@@ -376,8 +376,7 @@ class ActivityMain : AppCompatActivity() {
 
             val soundAdapter =
                 RecyclerAdapter(R.layout.item_sound, sounds.size) { holder, position ->
-                    selectedSound = position
-                    val sound = sounds[position]
+                    sound = sounds[position]
                     (holder.view(R.id.icon) as ImageView).setImageResource(sound.type.typeIcon)
                     (holder.view(R.id.artist) as TextView).text = sound.artist
                     (holder.view(R.id.album) as TextView).text = sound.album

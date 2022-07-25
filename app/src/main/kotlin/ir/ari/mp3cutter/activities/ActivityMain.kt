@@ -38,7 +38,6 @@ class ActivityMain : AppCompatActivity() {
     private val activityMain = this@ActivityMain
     private lateinit var binding: ActivityMainBinding
     private var filter = ""
-    private var showAll = true
     private val sounds: ArrayList<Sound> = arrayListOf()
     private lateinit var sound: Sound
 
@@ -332,22 +331,17 @@ class ActivityMain : AppCompatActivity() {
         if (isStoragePermissionGranted) {
             var selection: String
             val selectionArgsList: ArrayList<String> = arrayListOf()
-            if (showAll) {
-                selection = "(_DATA LIKE ?)"
-                selectionArgsList.add("%")
-            } else {
-                selection = "("
-                SoundFile.getSupportedExtensions().forEach {
-                    selectionArgsList.add("%.$it")
-                    if (selection.length > 1) {
-                        selection += " OR "
-                    }
-                    selection += "(_DATA LIKE ?)"
+            selection = "("
+            SoundFile.getSupportedExtensions().forEach {
+                selectionArgsList.add("%.$it")
+                if (selection.length > 1) {
+                    selection += " OR "
                 }
-                selection += ")"
-                selection = "($selection) AND (_DATA NOT LIKE ?)"
-                selectionArgsList.add("%espeak-data/scratch%")
+                selection += "(_DATA LIKE ?)"
             }
+            selection += ")"
+            selection = "($selection) AND (_DATA NOT LIKE ?)"
+            selectionArgsList.add("%espeak-data/scratch%")
             if (filter.isNotEmpty()) {
                 filter = "%$filter%"
                 selection =

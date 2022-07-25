@@ -59,6 +59,7 @@
     <string name="action_yes">Yes</string>
     <string name="action_no">No</string>
     <string name="action_open">Open</string>
+    <string name="action_search">Search</string>
     <string name="action_refresh">Refresh</string>
     <string name="action_record">Record new</string>
     <string name="action_about">About</string>

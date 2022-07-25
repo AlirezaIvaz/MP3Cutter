@@ -60,6 +60,7 @@
     <string name="action_close">بستن</string>
     <string name="action_yes">بله</string>
     <string name="action_no">خیر</string>
+    <string name="action_search">جستجو</string>
     <string name="action_refresh">تازه‌سازی</string>
     <string name="action_record">ضبط صدا</string>
     <string name="action_about">درباره ما</string>

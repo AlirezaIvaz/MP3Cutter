@@ -40,6 +40,7 @@ import ir.ari.mp3cutter.utils.*
 class ActivityMain : AppCompatActivity() {
     private val activityMain = this@ActivityMain
     private lateinit var binding: ActivityMainBinding
+    private lateinit var searchView: SearchView
     private var filter = ""
     private val sounds: ArrayList<Sound> = arrayListOf()
     private lateinit var sound: Sound
@@ -757,6 +758,20 @@ class ActivityMain : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main, menu)
+        searchView = menu.findItem(R.id.action_search).actionView as SearchView
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextChange(newText: String): Boolean {
+                filter = newText
+                restartActivity()
+                return true
+            }
+
+            override fun onQueryTextSubmit(query: String): Boolean {
+                filter = query
+                restartActivity()
+                return true
+            }
+        })
         return true
     }
 

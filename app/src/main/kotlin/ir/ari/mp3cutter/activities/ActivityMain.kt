@@ -185,10 +185,11 @@ class ActivityMain : AppCompatActivity() {
     }
 
     private fun requestWriteSettingsPermission() {
-        requestWriteSettingsPermissionResult.launch(
-            Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS)
-                .setData(Uri.parse("package:$packageName"))
-        )
+        if (Build.VERSION.SDK_INT >= 23)
+            requestWriteSettingsPermissionResult.launch(
+                Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS)
+                    .setData(Uri.parse("package:$packageName"))
+            )
     }
 
     override fun onRequestPermissionsResult(

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_refresh"
+        android:icon="@drawable/ic_refresh"
+        android:title="@string/action_refresh"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_record"
+        android:icon="@drawable/ic_voice"
+        android:title="@string/action_record"
+        app:showAsAction="ifRoom" />
+    <item
+        android:icon="@drawable/ic_account_circle"
+        android:title="@string/action_about"
+        app:showAsAction="never">
+        <menu>
+            <item
+                android:id="@+id/action_about"
+                android:icon="@drawable/ic_account_circle"
+                android:title="@string/action_about" />
+            <item
+                android:id="@+id/action_licenses"
+                android:icon="@drawable/ic_license"
+                android:title="@string/action_licenses" />
+            <item
+                android:id="@+id/action_privacy"
+                android:icon="@drawable/ic_privacy"
+                android:title="@string/action_privacy" />
+        </menu>
+    </item>
+    <item
+        android:id="@+id/action_settings"
+        android:icon="@drawable/ic_settings"
+        android:title="@string/action_settings"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_exit"
+        android:icon="@drawable/ic_exit"
+        android:title="@string/action_exit"
+        app:showAsAction="never" />
+</menu>

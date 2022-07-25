@@ -14,6 +14,8 @@ import android.provider.ContactsContract
 import android.provider.MediaStore
 import android.provider.Settings
 import android.text.Html
+import android.view.Menu
+import android.view.MenuItem
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.ImageView
@@ -21,6 +23,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -750,6 +753,45 @@ class ActivityMain : AppCompatActivity() {
         Handler(Looper.getMainLooper()).postDelayed({
             startActivity()
         }, 1000)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_refresh -> {
+                restartActivity()
+                true
+            }
+            R.id.action_record -> {
+                // TODO: Open voice recorder and after record finished open the editor
+                true
+            }
+            R.id.action_about -> {
+                // TODO: Show about dialog
+                true
+            }
+            R.id.action_licenses -> {
+                // TODO: Show application licenses dialog
+                true
+            }
+            R.id.action_privacy -> {
+                // TODO: Show privacy policy information dialog
+                true
+            }
+            R.id.action_settings -> {
+                // TODO: Open application settings page
+                true
+            }
+            R.id.action_exit -> {
+                finish()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
 }

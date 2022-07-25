@@ -60,6 +60,13 @@
     <string name="action_close">بستن</string>
     <string name="action_yes">بله</string>
     <string name="action_no">خیر</string>
+    <string name="action_refresh">تازه‌سازی</string>
+    <string name="action_record">ضبط صدا</string>
+    <string name="action_about">درباره ما</string>
+    <string name="action_licenses">پروانه‌ها</string>
+    <string name="action_privacy">سیاست حریم خصوصی</string>
+    <string name="action_settings">تنظیمات</string>
+    <string name="action_exit">خروج</string>
     <string name="action_open">بازکردن</string>
     <string name="action_edit">ویرایش</string>
     <string name="action_delete">حذف</string>

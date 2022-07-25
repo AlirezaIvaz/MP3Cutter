@@ -7,3 +7,8 @@ object Types {
     const val Alarm = "alarm"
     const val Notification = "notification"
 }
+
+object Actions {
+    const val RequestStoragePermission = 100
+    const val RequestContactsPermission = 101
+}

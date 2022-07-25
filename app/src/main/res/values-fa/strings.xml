@@ -40,7 +40,14 @@
         "که خواستید می‌توانید آن‌را از برنامه بگیرید.\n"
         "هم‌چنین می‌توانید %1$s را از تنظیمات دستگاه خود به‌صورت دستی تغییر دهید."
     </string>
+    <string name="contacts_permission_request">
+        "برای این‌که این برنامه بتواند آهنگ زنگ مخاطبین شما را تغییر دهد، باید دسترسی مخاطبین را "
+        "به این برنامه بدهید.\n"
+        "ما از این دسترسی فقط برای تغییر آهنگ زنگ مخاطب انتخاب‌شده توسط شما استفاده می‌کنیم و شما "
+        "می‌توانید هر زمان که خواستید این دسترسی را از برنامه بگیرید.\n"
+    </string>
     <string name="set_default_success">«%1$s» با موفقیت به‌عنوان %2$s پیش‌فرض تنظیم شد!</string>
+    <string name="assign_contact_success">"%1$s" با موفقیت به‌عنوان آهنگ زنگ "%2$s" تنظیم شد!</string>
     <string name="copy_success">مسیر با موفقیت در بریده‌دان رونویسی شد!</string>
 
     <!-- Actions -->
@@ -64,6 +71,7 @@
 
     <!-- Permissions -->
     <string name="permission_storage">فضای ذخیره‌سازی</string>
+    <string name="permission_contacts">مخاطبین</string>
 
     <!-- Sound types -->
     <string name="type_music">موسیقی</string>

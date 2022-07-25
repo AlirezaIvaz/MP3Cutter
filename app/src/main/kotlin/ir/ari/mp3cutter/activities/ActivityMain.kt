@@ -4,18 +4,18 @@ import android.Manifest
 import android.app.Activity
 import android.content.ClipData
 import android.content.ClipboardManager
+import android.content.ContentValues
 import android.content.Intent
+import android.database.Cursor
 import android.media.RingtoneManager
 import android.net.Uri
 import android.os.*
+import android.provider.ContactsContract
 import android.provider.MediaStore
 import android.provider.Settings
 import android.text.Html
 import android.view.ViewGroup
-import android.widget.CheckBox
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -37,6 +37,7 @@ class ActivityMain : AppCompatActivity() {
     private var filter = ""
     private var showAll = true
     private val sounds: ArrayList<Sound> = arrayListOf()
+    private var selectedSound = 0
 
     private val requestStoragePermissionResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -60,6 +61,54 @@ class ActivityMain : AppCompatActivity() {
             }
         }
 
+    private val chooseContactResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == RESULT_OK) {
+                try {
+                    val contactData: Uri? = it.data?.data
+                    val contactId = contactData?.lastPathSegment
+                    val projection = arrayOf(
+                        ContactsContract.Contacts._ID,
+                        ContactsContract.Contacts.DISPLAY_NAME,
+                        ContactsContract.Contacts.HAS_PHONE_NUMBER
+                    )
+                    val localCursor: Cursor? =
+                        contentResolver.query(contactData!!, projection, null, null, null)
+                    localCursor?.moveToFirst()
+                    val contactID: String? =
+                        localCursor?.getString(localCursor.getColumnIndexOrThrow("_id"))
+                    val contactDisplayName: String? =
+                        localCursor?.getString(localCursor.getColumnIndexOrThrow("display_name"))
+                    val localUri =
+                        Uri.withAppendedPath(ContactsContract.Contacts.CONTENT_URI, contactID)
+                    localCursor?.close()
+                    val localContentValues = ContentValues()
+                    localContentValues.put(ContactsContract.Data.RAW_CONTACT_ID, contactId)
+                    localContentValues.put(
+                        ContactsContract.Data.CUSTOM_RINGTONE,
+                        sounds[selectedSound].path
+                    )
+                    contentResolver.update(localUri, localContentValues, null, null)
+                    Snackbar.make(
+                        binding.root,
+                        String.format(
+                            "Ringtone assigned to \"%1\$s\" successfully!",
+                            contactDisplayName
+                        ),
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+
+                } catch (e: Exception) {
+                    Snackbar.make(
+                        binding.root,
+                        R.string.error_unknown,
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                    e.printStackTrace()
+                }
+            }
+        }
+
     private fun requestStoragePermission() {
         if (Build.VERSION.SDK_INT >= 30) {
             try {
@@ -76,7 +125,7 @@ class ActivityMain : AppCompatActivity() {
             ActivityCompat.requestPermissions(
                 this@ActivityMain,
                 arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                100
+                Actions.RequestStoragePermission
             )
         }
     }
@@ -98,7 +147,7 @@ class ActivityMain : AppCompatActivity() {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
-            100 -> if (grantResults.isNotEmpty()) {
+            Actions.RequestStoragePermission -> if (grantResults.isNotEmpty()) {
                 if (isStoragePermissionGranted) {
                     restartActivity()
                 } else {
@@ -114,6 +163,24 @@ class ActivityMain : AppCompatActivity() {
                             requestStoragePermission()
                         }
                         .show()
+                }
+            }
+            Actions.RequestContactsPermission -> if (grantResults.isNotEmpty()) {
+                if (isPermissionGranted(Manifest.permission.WRITE_CONTACTS)) {
+                    chooseContactResult.launch(
+                        Intent(Intent.ACTION_PICK).setType(
+                            ContactsContract.Contacts.CONTENT_TYPE
+                        )
+                    )
+                } else {
+                    Snackbar.make(
+                        binding.root,
+                        String.format(
+                            R.string.warning_permission_denied.toString(activityMain),
+                            R.string.permission_contacts.toString(activityMain)
+                        ),
+                        Snackbar.LENGTH_SHORT
+                    ).show()
                 }
             }
         }
@@ -309,6 +376,7 @@ class ActivityMain : AppCompatActivity() {
 
             val soundAdapter =
                 RecyclerAdapter(R.layout.item_sound, sounds.size) { holder, position ->
+                    selectedSound = position
                     val sound = sounds[position]
                     (holder.view(R.id.icon) as ImageView).setImageResource(sound.type.typeIcon)
                     (holder.view(R.id.artist) as TextView).text = sound.artist
@@ -450,7 +518,28 @@ class ActivityMain : AppCompatActivity() {
                                         R.drawable.ic_contacts,
                                         R.string.action_assign_contact.toString(activityMain)
                                     ) {
-                                        // TODO: Assign sound to a contact
+                                        dialog.dismiss()
+                                        if (isPermissionGranted(Manifest.permission.WRITE_CONTACTS)) {
+                                            chooseContactResult.launch(
+                                                Intent(Intent.ACTION_PICK).setType(
+                                                    ContactsContract.Contacts.CONTENT_TYPE
+                                                )
+                                            )
+                                        } else {
+                                            MaterialAlertDialogBuilder(activityMain)
+                                                .setIcon(R.drawable.ic_contacts)
+                                                .setTitle(R.string.attention)
+                                                .setMessage(R.string.contacts_permission_request)
+                                                .setPositiveButton(R.string.action_grant) { _, _ ->
+                                                    ActivityCompat.requestPermissions(
+                                                        this@ActivityMain,
+                                                        arrayOf(Manifest.permission.WRITE_CONTACTS),
+                                                        Actions.RequestContactsPermission
+                                                    )
+                                                }
+                                                .setNegativeButton(R.string.action_cancel, null)
+                                                .show()
+                                        }
                                     }
                                 )
                             }

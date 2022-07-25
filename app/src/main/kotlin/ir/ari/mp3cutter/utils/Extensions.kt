@@ -12,6 +12,13 @@ import ir.ari.mp3cutter.R
 
 fun Int.toString(context: Context): String = context.getString(this)
 
+fun Activity.isPermissionGranted(permission: String): Boolean {
+    return if (Build.VERSION.SDK_INT >= 23) ContextCompat.checkSelfPermission(
+        this,
+        permission
+    ) == PackageManager.PERMISSION_GRANTED else true
+}
+
 val Activity.isStoragePermissionGranted: Boolean
     get() = when {
         Build.VERSION.SDK_INT >= 30 -> {

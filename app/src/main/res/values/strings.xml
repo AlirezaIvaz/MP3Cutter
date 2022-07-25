@@ -38,7 +38,14 @@
         "device and you can revoke it from the app whenever you want.\n"
         "You can also change the ringtone manually from your device settings."
     </string>
+    <string name="contacts_permission_request">
+        "In order for this app to be able to change the ringtone of your contacts, you need to "
+        "give this app contacts permission.\n"
+        "We only use this permission to change the ringtone of the contact selected by you and you "
+        "can revoke it from the app whenever you want.\n"
+    </string>
     <string name="set_default_success">"%1$s" was successfully set as default %2$s!</string>
+    <string name="assign_contact_success">"%1$s" has been successfully assigned as "%2$s" ringtone!</string>
     <string name="copy_success">The path was successfully copied to the clipboard!</string>
 
     <!-- Actions -->
@@ -62,6 +69,7 @@
 
     <!-- Permissions -->
     <string name="permission_storage">Storage</string>
+    <string name="permission_contacts">Contacts</string>
 
     <!-- Sound types -->
     <string name="type_music">Music</string>

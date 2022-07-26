@@ -37,20 +37,6 @@ android {
         jvmTarget = "11"
     }
 
-    flavorDimensions += "type"
-    productFlavors {
-        create("free") {
-            dimension = "type"
-            applicationIdSuffix = ".free"
-            versionNameSuffix = "-free"
-        }
-        create("pro") {
-            dimension = "type"
-            applicationIdSuffix = ".pro"
-            versionNameSuffix = "-pro"
-        }
-    }
-
 }
 
 dependencies {

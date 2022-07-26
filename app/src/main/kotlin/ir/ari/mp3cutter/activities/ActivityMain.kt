@@ -163,6 +163,11 @@ class ActivityMain : AppCompatActivity() {
             }
         }
 
+    private val recordNewVoiceResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            // TODO: Open sound editor activity
+        }
+
     private fun requestStoragePermission() {
         if (Build.VERSION.SDK_INT >= 30) {
             try {
@@ -784,7 +789,7 @@ class ActivityMain : AppCompatActivity() {
                 true
             }
             R.id.action_record -> {
-                // TODO: Open voice recorder and after record finished open the editor
+                recordNewVoiceResult.launch(Intent(MediaStore.Audio.Media.RECORD_SOUND_ACTION))
                 true
             }
             R.id.action_about -> {

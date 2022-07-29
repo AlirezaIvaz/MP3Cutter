@@ -75,6 +75,11 @@
     <string name="action_copy_path">Copy path</string>
     <string name="action_set_default">Set as default %1$s</string>
     <string name="action_assign_contact">Assign to contact</string>
+    <string name="action_review">Write a review</string>
+    <string name="action_apps">Other apps</string>
+    <string name="action_website">Visit the website</string>
+    <string name="action_email">Send email</string>
+    <string name="action_code">Source code in GitHub</string>
 
     <!-- Permissions -->
     <string name="permission_storage">Storage</string>
@@ -98,5 +103,6 @@
         <h3>Path:</h3> %4$s
         ]]>
     </string>
+    <string name="dialog_about">Developed &amp; designed by Alireza Ivaz.</string>
 
 </resources>

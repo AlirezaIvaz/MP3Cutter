@@ -77,6 +77,11 @@
     <string name="action_copy_path">رونوشت مسیر</string>
     <string name="action_set_default">تنظیم به‌عنوان %1$s پیش‌فرض</string>
     <string name="action_assign_contact">تنظیم برای مخاطب</string>
+    <string name="action_review">نوشتن دیدگاه</string>
+    <string name="action_apps">برنامه‌های دیگر</string>
+    <string name="action_website">بازدید از وب‌سایت</string>
+    <string name="action_email">فرستادن رایانامه</string>
+    <string name="action_code">کد منبع در گیت‌هاب</string>
 
     <!-- Permissions -->
     <string name="permission_storage">فضای ذخیره‌سازی</string>
@@ -100,5 +105,6 @@
         <h3>مسیر:</h3> %4$s
         ]]>
     </string>
+    <string name="dialog_about">توسعه‌یافته و طراحی‌شده توسط علیرضا ایوز.</string>
 
 </resources>

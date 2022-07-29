@@ -24,6 +24,7 @@ import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -793,7 +794,52 @@ class ActivityMain : AppCompatActivity() {
                 true
             }
             R.id.action_about -> {
-                // TODO: Show about dialog
+                val builder = MaterialAlertDialogBuilder(activityMain)
+                builder.setTitle(R.string.action_about)
+                builder.setMessage(R.string.dialog_about)
+                builder.setPositiveButton(R.string.action_close, null)
+                val dialog = builder.create()
+                val items: ArrayList<Item> = arrayListOf(
+                    Item(R.drawable.ic_review, R.string.action_review.toString(activityMain)) {
+                        // TODO: On review item clicked
+                    },
+                    Item(R.drawable.ic_apps, R.string.action_apps.toString(activityMain)) {
+                        // TODO: On apps item clicked
+                    },
+                    Item(R.drawable.ic_email, R.string.action_email.toString(activityMain)) {
+                        dialog.dismiss()
+                        try {
+                            startActivity(
+                                Intent(Intent.ACTION_SEND)
+                                    .setType("*/*")
+                                    .putExtra(Intent.EXTRA_EMAIL, "info@alirezaivaz.ir")
+                            )
+                        } catch (e: Exception) {
+                            Snackbar.make(binding.root, R.string.error_unknown, Snackbar.LENGTH_SHORT).show()
+                        }
+                    },
+                    Item(R.drawable.ic_web, R.string.action_website.toString(activityMain)) {
+                        dialog.dismiss()
+                        launchUrl("https://alirezaivaz.ir/")
+                    },
+                    Item(R.drawable.ic_code, R.string.action_code.toString(activityMain)) {
+                        dialog.dismiss()
+                        launchUrl("https://github.com/AlirezaIvaz/MP3Cutter")
+                    }
+                )
+                val adapter = RecyclerAdapter(R.layout.item, 5) { holder, position ->
+                    val aboutItem = items[position]
+                    (holder.view(R.id.icon) as ImageView).setImageResource(aboutItem.icon)
+                    (holder.view(R.id.title) as TextView).text = aboutItem.title
+                    (holder.view(R.id.item_layout) as ConstraintLayout).setOnClickListener {
+                        aboutItem.onClick()
+                    }
+                }
+                val recyclerView = RecyclerView(activityMain)
+                recyclerView.layoutManager = LinearLayoutManager(activityMain)
+                recyclerView.adapter = adapter
+                dialog.setView(recyclerView)
+                dialog.show()
                 true
             }
             R.id.action_licenses -> {

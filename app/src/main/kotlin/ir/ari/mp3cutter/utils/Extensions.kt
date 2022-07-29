@@ -4,13 +4,22 @@ import android.Manifest
 import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.provider.Settings
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.content.ContextCompat
 import ir.ari.mp3cutter.R
 
 fun Int.toString(context: Context): String = context.getString(this)
+
+fun Activity.launchUrl(url: String) {
+    CustomTabsIntent
+        .Builder()
+        .build()
+        .launchUrl(this, Uri.parse(url))
+}
 
 fun Activity.isPermissionGranted(permission: String): Boolean {
     return if (Build.VERSION.SDK_INT >= 23) ContextCompat.checkSelfPermission(

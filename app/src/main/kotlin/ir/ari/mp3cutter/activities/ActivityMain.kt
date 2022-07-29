@@ -31,6 +31,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
+import io.noties.markwon.Markwon
 import ir.ari.mp3cutter.BuildConfig
 import ir.ari.mp3cutter.R
 import ir.ari.mp3cutter.databinding.ActivityMainBinding
@@ -869,7 +870,14 @@ class ActivityMain : AppCompatActivity() {
                 true
             }
             R.id.action_licenses -> {
-                // TODO: Show application licenses dialog
+                val data = application.assets.open("THANKS.md").bufferedReader().use {
+                    it.readText()
+                }
+                MaterialAlertDialogBuilder(activityMain)
+                    .setTitle(R.string.action_licenses)
+                    .setMessage(Markwon.create(activityMain).toMarkdown(data))
+                    .setPositiveButton(R.string.action_ok, null)
+                    .show()
                 true
             }
             R.id.action_privacy -> {

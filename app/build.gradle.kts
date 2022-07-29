@@ -1,3 +1,5 @@
+import com.android.build.gradle.internal.tasks.factory.dependsOn
+
 plugins {
     id("com.android.application")
     kotlin("android")
@@ -107,6 +109,14 @@ android {
         }
     }
 
+    project.tasks.preBuild.dependsOn("copyLicenseToAssets")
+
+}
+
+tasks.register<Copy>("copyLicenseToAssets") {
+    mkdir("$projectDir/src/main/assets")
+    from("$rootDir/THANKS.md")
+    into("$projectDir/src/main/assets")
 }
 
 dependencies {
@@ -121,4 +131,5 @@ dependencies {
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     implementation("androidx.webkit:webkit:1.4.0")
     implementation("com.google.android.material:material:1.6.1")
+    implementation("io.noties.markwon:core:4.6.2")
 }

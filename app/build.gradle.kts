@@ -37,6 +37,76 @@ android {
         jvmTarget = "11"
     }
 
+    flavorDimensions += "distributor"
+    productFlavors {
+        create("general") {
+            dimension = "distributor"
+            buildConfigField("String", "FLAVOR_REVIEW_INTENT", "\"\"")
+            buildConfigField("String", "FLAVOR_APPS_INTENT", "\"\"")
+        }
+        create("googlePlay") {
+            dimension = "distributor"
+            buildConfigField(
+                "String",
+                "FLAVOR_REVIEW_INTENT",
+                "\"market://details?id=${defaultConfig.applicationId}\""
+            )
+            buildConfigField("String", "FLAVOR_APPS_INTENT", "\"market://dev?id=0\"")
+        }
+        create("galaxyStore") {
+            dimension = "distributor"
+            buildConfigField(
+                "String",
+                "FLAVOR_REVIEW_INTENT",
+                "\"samsungapps://AppRating/${defaultConfig.applicationId}\""
+            )
+            buildConfigField(
+                "String",
+                "FLAVOR_APPS_INTENT",
+                "\"samsungapps://SellerDetail/000000055766\""
+            )
+        }
+        create("cafeBazaar") {
+            dimension = "distributor"
+            buildConfigField(
+                "String",
+                "FLAVOR_REVIEW_INTENT",
+                "\"bazaar://details?id=${defaultConfig.applicationId}\""
+            )
+            buildConfigField(
+                "String",
+                "FLAVOR_APPS_INTENT",
+                "\"bazaar://collection?slug=by_author&aid=alirezaivaz\""
+            )
+        }
+        create("myket") {
+            dimension = "distributor"
+            buildConfigField(
+                "String",
+                "FLAVOR_REVIEW_INTENT",
+                "\"myket://comment?id=${defaultConfig.applicationId}\""
+            )
+            buildConfigField(
+                "String",
+                "FLAVOR_APPS_INTENT",
+                "\"myket://developer/${defaultConfig.applicationId}\""
+            )
+        }
+        create("charkhoneh") {
+            dimension = "distributor"
+            buildConfigField(
+                "String",
+                "FLAVOR_REVIEW_INTENT",
+                "\"jhoobin://comment?q=${defaultConfig.applicationId}\""
+            )
+            buildConfigField(
+                "String",
+                "FLAVOR_APPS_INTENT",
+                "\"jhoobin://collection?type=APP&id=27501\""
+            )
+        }
+    }
+
 }
 
 dependencies {

@@ -31,6 +31,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
+import ir.ari.mp3cutter.BuildConfig
 import ir.ari.mp3cutter.R
 import ir.ari.mp3cutter.databinding.ActivityMainBinding
 import ir.ari.mp3cutter.file.SoundFile
@@ -801,10 +802,35 @@ class ActivityMain : AppCompatActivity() {
                 val dialog = builder.create()
                 val items: ArrayList<Item> = arrayListOf(
                     Item(R.drawable.ic_review, R.string.action_review.toString(activityMain)) {
-                        // TODO: On review item clicked
+                        try {
+                            startActivity(
+                                Intent(
+                                    if (BuildConfig.FLAVOR == "cafeBazaar") Intent.ACTION_EDIT
+                                    else Intent.ACTION_VIEW
+                                )
+                                    .setData(Uri.parse(BuildConfig.FLAVOR_REVIEW_INTENT))
+                            )
+                        } catch (e: Exception) {
+                            Snackbar.make(
+                                binding.root,
+                                R.string.error_bad_exception,
+                                Snackbar.LENGTH_SHORT
+                            ).show()
+                        }
                     },
                     Item(R.drawable.ic_apps, R.string.action_apps.toString(activityMain)) {
-                        // TODO: On apps item clicked
+                        try {
+                            startActivity(
+                                Intent(Intent.ACTION_VIEW)
+                                    .setData(Uri.parse(BuildConfig.FLAVOR_APPS_INTENT))
+                            )
+                        } catch (e: Exception) {
+                            Snackbar.make(
+                                binding.root,
+                                R.string.error_bad_exception,
+                                Snackbar.LENGTH_SHORT
+                            ).show()
+                        }
                     },
                     Item(R.drawable.ic_email, R.string.action_email.toString(activityMain)) {
                         dialog.dismiss()

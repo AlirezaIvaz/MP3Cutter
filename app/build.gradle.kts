@@ -122,16 +122,16 @@ tasks.register<Copy>("copyLicenseToAssets") {
 }
 
 dependencies {
-    implementation("androidx.core:core-ktx:1.8.0")
-    implementation("androidx.core:core-splashscreen:1.0.0-rc01")
-    implementation("androidx.appcompat:appcompat:1.6.0-alpha05")
-    implementation("androidx.browser:browser:1.4.0")
+    implementation("androidx.core:core-ktx:1.10.1")
+    implementation("androidx.core:core-splashscreen:1.1.0-alpha01")
+    implementation("androidx.appcompat:appcompat:1.7.0-alpha02")
+    implementation("androidx.browser:browser:1.5.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.coordinatorlayout:coordinatorlayout:1.2.0")
     implementation("androidx.preference:preference-ktx:1.2.0")
-    implementation("androidx.recyclerview:recyclerview:1.2.1")
+    implementation("androidx.recyclerview:recyclerview:1.3.0")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
-    implementation("androidx.webkit:webkit:1.4.0")
-    implementation("com.google.android.material:material:1.6.1")
+    implementation("androidx.webkit:webkit:1.6.1")
+    implementation("com.google.android.material:material:1.9.0")
     implementation("io.noties.markwon:core:4.6.2")
 }

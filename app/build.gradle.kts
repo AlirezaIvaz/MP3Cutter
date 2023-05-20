@@ -6,6 +6,7 @@ plugins {
 }
 
 android {
+    namespace = "ir.ari.mp3cutter"
     compileSdk = 32
 
     defaultConfig {
